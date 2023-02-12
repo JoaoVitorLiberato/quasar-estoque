@@ -60,6 +60,16 @@ export default function userAuthUser() {
     return user;
   };
 
+  const resetPassword = async (accessToken, newPassword) => {
+    const { user, error } = await supabase.auth.updateUser(accessToken, {
+      password: newPassword,
+    });
+
+    if (error) throw error;
+
+    return user;
+  };
+
   return {
     isLoggedIn,
     login,
@@ -69,5 +79,6 @@ export default function userAuthUser() {
     sendPasswordRestEmail,
     update,
     user,
+    resetPassword,
   };
 }

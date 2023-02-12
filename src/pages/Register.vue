@@ -6,13 +6,22 @@
         <q-input label="Name" outlined v-model="form.name" />
         <q-input label="Email" outlined v-model="form.email" />
         <q-input label="Password" outlined v-model="form.password" />
-        <div class="full-width q-pt-md">
+        <div class="full-width q-pt-md q-gutter-y-sm">
           <q-btn
             type="submit"
             label="Register"
             color="primary"
             class="full-width"
             outline
+            rounded
+            size="lg"
+          />
+          <q-btn
+            :to="{ name: 'login' }"
+            label="Back"
+            color="dark"
+            class="full-width"
+            flat
             rounded
             size="lg"
           />

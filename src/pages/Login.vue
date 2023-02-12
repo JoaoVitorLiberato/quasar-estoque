@@ -16,7 +16,7 @@
             size="lg"
           />
         </div>
-        <div class="full-width">
+        <div class="full-width q-gutter-y-md">
           <q-btn
             label="Register"
             color="primary"
@@ -24,6 +24,18 @@
             flat
             rounded
             to="/register"
+            size="sm"
+          />
+        </div>
+        <div class="full-width">
+          <q-btn
+            label="Forgot Password ?"
+            color="primary"
+            class="full-width"
+            flat
+            rounded
+            to="/forgot-password"
+            size="sm"
           />
         </div>
       </div>
