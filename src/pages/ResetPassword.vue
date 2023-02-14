@@ -35,7 +35,8 @@ export default defineComponent({
     const token = route.query.token;
 
     const handlePasswordReset = async () => {
-      await resetPassword(token, password.value);
+      console.log(token, password);
+      await resetPassword(password.value);
       router.push({ name: "login" });
     };
 
