@@ -49,6 +49,7 @@ import EssentialLink from "components/EssentialLink.vue";
 import userAuthUser from "src/composables/UseAuthUser";
 import { useRouter } from "vue-router";
 import { useQuasar } from "quasar";
+import UseLoading from "src/composables/useLoading";
 
 const linksList = [
   {
@@ -107,6 +108,7 @@ export default defineComponent({
     const router = useRouter();
     const { logout } = userAuthUser();
     const $q = useQuasar();
+    const { showLoading } = UseLoading()
 
     const handleLogout = async () => {
       $q.dialog({
@@ -115,10 +117,13 @@ export default defineComponent({
         cancel: true,
         persistent: true,
       }).onOk(async () => {
-        await logout();
-        router.replace({
-          name: "login",
-        });
+        showLoading("You will be redirected to the login area.", 1100)
+        setInterval(async () => {
+          await logout();
+          router.replace({
+            name: "login",
+          });
+        }, 1200)
       });
     };
 
