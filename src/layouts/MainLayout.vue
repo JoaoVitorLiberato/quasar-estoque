@@ -118,7 +118,7 @@ export default defineComponent({
         persistent: true,
       }).onOk(async () => {
         showLoading("You will be redirected to the login area.", 1100)
-        setInterval(async () => {
+        setTimeout(async () => {
           await logout();
           router.replace({
             name: "login",

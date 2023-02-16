@@ -93,14 +93,11 @@ export default defineComponent({
     const handleLogin = async () => {
       try {
 
-        showLoading("Carregando...",1000)
-
-        setInterval(async () => {
-          await login(form.value);
-        }, 1100)
+        showLoading("Loading...",1000)
+        await login(form.value);
 
         setTimeout(() => {
-          notifySuccess("Sucesso ao efetuar o login")
+          notifySuccess("Success when logging in")
           router.push({
             name: "me",
           });

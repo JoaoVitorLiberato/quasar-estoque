@@ -120,7 +120,7 @@ export default defineComponent({
 
         showLoading("Aguarde...", 1300)
 
-        setInterval(async () => {
+        setTimeout(async () => {
           await register(form.value);
         }, 1400)
 
