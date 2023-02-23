@@ -3,7 +3,7 @@ import userAuthUser from "./UseAuthUser"
 
 export default function useAPi() {
 
-  const supabase = useSupabase()
+  const { supabase } = useSupabase()
   const { user } = userAuthUser()
 
 
@@ -13,7 +13,6 @@ export default function useAPi() {
       .select('*')
 
     if (error) throw error
-
     return data
   }
 

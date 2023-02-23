@@ -2,10 +2,11 @@
   <q-page padding>
     <div class="q-pa-md">
     <q-table
-      :rows="rows"
+      :rows="categories"
       :columns="columns"
       row-key="calories"
       class="col-12"
+      :loading="loading"
     >
       <template v-slot:top>
         <span class="text-h6">
@@ -13,8 +14,12 @@
         </span>
         <q-space />
         <q-btn
+          icon="mdi-plus"
           label="Add New"
           color="primary"
+          dense
+          size="md"
+          :to="{name: 'form-category'}"
         />
       </template>
       <template v-slot:body-cell-actions="props">
@@ -47,7 +52,9 @@
 </template>
 
 <script>
-  import { defineComponent } from "vue"
+  import { defineComponent, ref, onMounted } from "vue"
+  import useAPi from "src/composables/UserApi";
+  import UseNotify from "src/composables/useNotify";
 
   const columns =
   [
@@ -55,23 +62,34 @@
     { name: 'actions', align: 'right', label: 'Actions', field: 'actions', sortable: true }
   ]
 
-  const rows =
-  [
-    {
-      id: '123',
-      name: 'Tênis'
-    }
-  ]
-
 
   export default defineComponent({
     name: "PageCategoryList",
     setup() {
 
+      const categories = ref([])
+      const loading = ref(false)
+      const { list } = useAPi()
+      const { notifyError } = UseNotify()
+
+      onMounted(() => {
+        const halndleListCategories = async () => {
+          try {
+            loading.value = true
+            categories.value = await list('category')
+            loading.value = false
+          } catch (error) {
+            notifyError(error.message)
+          }
+        }
+
+        halndleListCategories()
+      })
 
       return {
         columns,
-        rows
+        categories,
+        loading,
       }
     }
   });
